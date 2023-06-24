@@ -1,5 +1,9 @@
 "depots"
 {
+	"401"
+	{
+		"DecryptionKey" "3ed55d26ffdf7f6c5e228ec60127ddc1712f341cfb082cadb9cebbd0f64d0d7d"
+	}
 	"404"
 	{
 		"DecryptionKey" "552f270a24f114f8eb9ccaad3502d0f30f8950c67fcb62b2752f1ae5bd9eb2e1"
