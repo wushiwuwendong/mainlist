@@ -1,6 +1,6 @@
 # Steam 清单仓库
 作者：[@wxy1343](https://github.com/wxy1343)
-
+自用
 ## 项目简介
 
 * 使用`Actions`自动爬取`Steam`游戏清单
