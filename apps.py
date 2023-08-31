@@ -158,11 +158,11 @@ def export_xlsx(save_path='.'):
     ws.append(['app id', '游戏名', '中文名', '标签', '类型', '评分', '发行日期', '简介'])
     for i, info in sorted(MyJson('xiaoheihe.json').items(), key=lambda x: int(x[0])):
         try:
-            ws.append([i, info['name'], info['cname'], ','.join(info['tags']), info['type'], info['score'],
-                       info['release_date'], info['about']])
+            ws.append([i, info['EnglishName'], info['ChineseName'], ','.join(info['Tag']), info['Type'], info['Point'],
+                       info['PublicDate'], info['Description']])
         except IllegalCharacterError:
-            ws.append([i, info['name'], info['cname'], ','.join(info['tags']), info['type'], info['score'],
-                       info['release_date'], ILLEGAL_CHARACTERS_RE.sub('', info['about'])])
+            ws.append([i, info['EnglishName'], info['ChineseName'], ','.join(info['Tag']), info['Type'], info['Point'],
+                       info['PublicDate'], ILLEGAL_CHARACTERS_RE.sub('', info['Description'])])
     if save_path.is_dir():
         save_path = save_path / 'apps.xlsx'
     workbook.save(save_path)
