@@ -235,8 +235,8 @@ def generate_applist(app_id, dlc_id, manifest_id):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-r', '--repo', default='isKoi/Manifest-AutoUpdate')
-parser.add_argument('-a', '--app-id', nargs='+')
+parser.add_argument('-r', '--repo', default='wushiwuwendong/mainlist')
+parser.add_argument('-a', '--app-id')
 parser.add_argument('-p', '--app-path')
 parser.add_argument('-g', '--greenluma', default=False, action='store_true')
 parser.add_argument('-d', '--delete', default=False, action='store_true')
@@ -249,7 +249,8 @@ if __name__ == '__main__':
         else:
             if not args.app_id:
                 args.app_id = input('appid: ')
-            for id in args.app_id:
+            ids = args.app_id.split(";")
+            for id in ids:
                 main(id)
     except KeyboardInterrupt:
         exit()
