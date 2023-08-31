@@ -122,12 +122,15 @@ class ManifestAutoUpdate:
         if not self.app_sha:
             self.app_sha = self.repo.git.rev_list('--max-parents=0', 'app').strip()
             self.log.debug(f'app_sha: {self.app_sha}')
+        self.log.info(self.check_app_repo_local('data'))    
         if not self.check_app_repo_local('data'):
+            self.log.info('不存在本地data文件')
             if self.check_app_repo_remote('data'):
                 self.log.info('Pulling remote data branch!')
                 self.repo.git.fetch('origin', 'data:origin_data')
                 self.repo.git.worktree('add', '-b', 'data', 'data', 'origin_data')
             else:
+                self.log.info('远程仓库不存在data，推送')    
                 self.repo.git.worktree('add', '-b', 'data', 'data', 'app')
         data_repo = git.Repo('data')
         if data_repo.head.commit.hexsha == self.app_sha:

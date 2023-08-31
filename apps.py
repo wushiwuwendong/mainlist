@@ -94,7 +94,12 @@ class XiaoHeiHe:
                     'Point': score, 'PublicDate': release_date}
             wait = 60
             with lock:
-                self.xiao_hei_he[int(app_id)] = {**info, 'Description': about}
+                if 'applist' not in self.xiao_hei_he:
+                    self.xiao_hei_he['applist'] = {}
+                if 'apps' not in self.xiao_hei_he['applist']:
+                    self.xiao_hei_he['applist']['apps'] = []
+                #self.xiao_hei_he['applist']['apps'][int(app_id)] = {**info, 'Description': about,'Appid':app_id}
+                self.xiao_hei_he['applist']['apps'].append({**info, 'Description': about, 'Appid': app_id})
                 self.pbar.set_postfix(**{str(i): str(j) for i, j in info.items()})
                 self.pbar.update()
                 if self.pbar.n and self.pbar.n % 150 == 0:
@@ -105,6 +110,7 @@ class XiaoHeiHe:
             traceback.print_exc()
 
     def run(self):
+       
         with Pool(32) as pool:
             pool: ThreadPool
             result_list = []
@@ -121,6 +127,7 @@ class XiaoHeiHe:
                     time.sleep(0.5)
                     with lock:
                         self.xiao_hei_he.dump()
+                       
             except KeyboardInterrupt:
                 pass
 
@@ -177,4 +184,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     get_app_info(args.repo)
     XiaoHeiHe().run()
-    export_xlsx(args.output)
+    #export_xlsx(args.output)
