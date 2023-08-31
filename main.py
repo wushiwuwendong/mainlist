@@ -123,6 +123,8 @@ class ManifestAutoUpdate:
             self.app_sha = self.repo.git.rev_list('--max-parents=0', 'app').strip()
             self.log.debug(f'app_sha: {self.app_sha}')
         self.log.info(self.check_app_repo_local('data'))    
+       
+       
         if not self.check_app_repo_local('data'):
             self.log.info('不存在本地data文件')
             if self.check_app_repo_remote('data'):
@@ -133,6 +135,8 @@ class ManifestAutoUpdate:
                 self.log.info('远程仓库不存在data，推送')    
                 self.repo.git.worktree('add', '-b', 'data', 'data', 'app')
         data_repo = git.Repo('data')
+        self.log.info(f'app_sha: {self.app_sha}')
+        self.log.info(f'data_repo: {data_repo.head.commit.hexsha}')
         if data_repo.head.commit.hexsha == self.app_sha:
             self.log.info('Initialize the data branch!')
             self.download_git_crypt()
