@@ -90,11 +90,11 @@ class XiaoHeiHe:
                     score = detail['result']['score']
                 if 'release_date' in detail['result']:
                     release_date = detail['result']['release_date']
-            info = {'type': type_, 'name': name, 'cname': cname, 'tags': tags,
-                    'score': score, 'release_date': release_date}
+            info = {'Type': type_, 'EnglishName': name, 'ChineseName': cname, 'Tag': tags,
+                    'Point': score, 'PublicDate': release_date}
             wait = 60
             with lock:
-                self.xiao_hei_he[int(app_id)] = {**info, 'about': about}
+                self.xiao_hei_he[int(app_id)] = {**info, 'Description': about}
                 self.pbar.set_postfix(**{str(i): str(j) for i, j in info.items()})
                 self.pbar.update()
                 if self.pbar.n and self.pbar.n % 150 == 0:
