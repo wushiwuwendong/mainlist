@@ -33,8 +33,7 @@ on:
         required: false
     branches:
       - main
-  schedule:
-    - cron: '0 12 * * *'
+
 concurrency:
   group: wait
   cancel-in-progress: false
